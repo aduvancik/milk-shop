@@ -33,7 +33,7 @@ export default function Basket({ cart, setCart, cartReady = false }) {
   // ЛОАДЕР поки cartReady === false
   if (!cartReady) {
     return (
-      <section>
+      <section className="">
         <h5 className="text-xl font-bold mb-4 text-[#466a59] tracking-wide drop-shadow-md relative 
           after:content-[''] after:block after:w-10 after:h-[3px] after:bg-[#466a59] after:mt-1 after:rounded-full">
           Кошик

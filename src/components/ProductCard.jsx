@@ -24,36 +24,38 @@ export default function ProductCard({ product, cart, setCart }) {
     setTimeout(() => setMessage(""), 3000);
   };
 
+
+
   return (
     <>
-      <div className="border rounded-2xl shadow-md hover:shadow-lg overflow-hidden transition flex flex-col relative">
+      <div className="border rounded-2xl shadow-md hover:shadow-lg overflow-hidden transition flex flex-col relative w-full md:min-w-[200px] max-w-[250px]">
         <Link href={`/product/${product.id}`} className="block">
-          <Image
-            src={product.image}
+          <img
+            src={product.image || "/img/placeholder.png"}
             alt={product.name}
-            width={300}
-            height={200}
             className="w-full h-48 object-cover"
           />
           <div className="p-4 flex flex-col gap-2">
-            <h2 className="font-semibold text-lg">{product.name}</h2>
-            <p className="text-red-600 font-bold">{product.price} грн/шт</p>
+            <h2 className="font-semibold text-base sm:text-lg md:text-xl">{product.name}</h2>
+            <div className="flex justify-between items-center">
+
+              <p className="text-red-600 font-bold sm:text-base text-xl sm:text-[10px] md:text-[13px] lg:text-[16px]">{product.price} грн/{product.unit}</p>
+              <button
+                onClick={handleCartClick}
+                className={`w-min bottom-2 right-2 rounded-full border-2 p-2 transition ${inCart ? "bg-green-500 border-green-500" : "border-gray-200 hover:bg-red-50"
+                  }`}
+              >
+                <CiShoppingBasket
+                  className={`${inCart ? "text-white" : "text-red-600"
+                    } text-xl sm:text-1xl md:text-1xl lg:text-2xl transition-all cursor-pointer`}
+                />
+
+              </button>
+            </div>
           </div>
         </Link>
-
-        <button
-          onClick={handleCartClick}
-          className={`absolute bottom-2 right-2 rounded-full border-2 p-2 transition ${
-            inCart
-              ? "bg-green-500 border-green-500"
-              : "border-gray-200 hover:bg-red-50"
-          }`}
-        >
-          <CiShoppingBasket
-            className={`text-2xl ${inCart ? "text-white" : "text-red-600"}`}
-          />
-        </button>
       </div>
+
 
       {message && (
         <div className="fixed top-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg text-white font-semibold z-50 bg-green-500">

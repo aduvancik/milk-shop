@@ -81,7 +81,7 @@ export default function Products({ cart, setCart }) {
   if (!mounted) return null;
 
   return (
-    <div className="p-4">
+    <div className="p-4" id="products">
       {/* Заголовок та фільтри */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <h5 className="text-xl font-bold mb-4 text-[#466a59] tracking-wide drop-shadow-md relative
@@ -89,22 +89,24 @@ export default function Products({ cart, setCart }) {
           Товари
         </h5>
 
-        <div className="flex flex-wrap gap-3 items-center">
+        <div className="flex flex-wrap gap-3 items-center sm:flex-row flex-col sm:items-center items-stretch">
+          {/* Пошук */}
           <input
             type="text"
             placeholder="Пошук за назвою..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="border rounded-lg p-2 w-48 focus:outline-none focus:ring-2 focus:ring-[#466a59]"
+            className="border rounded-lg p-2 w-full sm:w-48 focus:outline-none focus:ring-2 focus:ring-[#466a59]"
           />
 
-          <div className="flex gap-2 items-center">
+          {/* Мін/Макс */}
+          <div className="flex gap-2 items-center w-full sm:w-auto">
             <input
               type="number"
               placeholder="мін."
               value={priceRange.min}
               onChange={e => setPriceRange({ ...priceRange, min: e.target.value })}
-              className="w-20 border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#466a59]"
+              className="flex-1 sm:flex-none w-full sm:w-20 border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#466a59]"
             />
             <span>-</span>
             <input
@@ -112,14 +114,15 @@ export default function Products({ cart, setCart }) {
               placeholder="макс."
               value={priceRange.max}
               onChange={e => setPriceRange({ ...priceRange, max: e.target.value })}
-              className="w-20 border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#466a59]"
+              className="flex-1 sm:flex-none w-full sm:w-20 border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#466a59]"
             />
           </div>
 
+          {/* Сортування */}
           <select
             value={sortByPrice}
             onChange={e => setSortByPrice(e.target.value)}
-            className="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#466a59]"
+            className="border rounded-lg p-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-[#466a59]"
           >
             <option value="">Сортувати за ціною</option>
             <option value="asc">За зростанням</option>
@@ -129,14 +132,14 @@ export default function Products({ cart, setCart }) {
       </div>
 
       {/* Сітка продуктів або скелетони */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,280px))] gap-4 justify-center place-items-center mx-auto">
         {loading
           ? Array.from({ length: productsPerPage }).map((_, i) => (
             <div
               key={i}
-              className="border rounded-2xl shadow-md overflow-hidden animate-pulse flex flex-col"
+              className="border rounded-2xl shadow-md hover:shadow-lg overflow-hidden transition flex flex-col relative w-full max-w-[280px]"
             >
-              <div className="w-full h-48 bg-gray-200"></div>
+              <div className="w-full h-48 sm:h-52 md:h-56 lg:h-60 bg-gray-200"></div>
               <div className="p-4 space-y-2">
                 <div className="h-5 bg-gray-200 rounded w-3/4"></div>
                 <div className="h-4 bg-gray-200 rounded w-1/2"></div>
@@ -144,14 +147,19 @@ export default function Products({ cart, setCart }) {
             </div>
           ))
           : currentProducts.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              cart={cart}
-              setCart={setCart}
-            />
-          ))}
+            <div key={product.id} className="w-full max-w-[280px]">
+              <ProductCard
+                product={product}
+                cart={cart}
+                setCart={setCart}
+              />
+            </div>
+          ))
+        }
       </div>
+
+
+
 
       {/* Пагінація */}
       <div className="flex justify-center mt-6 gap-2 flex-wrap">

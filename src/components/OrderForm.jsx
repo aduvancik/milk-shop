@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from "react";
-import { db } from "@/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+// import { db } from "@/firebase";
+// import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { sendTelegramMessage } from "@/utils/sendTelegramMessage";
 
 export default function OrderForm({ cart, onClose }) {
@@ -26,8 +26,8 @@ export default function OrderForm({ cart, onClose }) {
     setLoading(true);
 
     try {
-      const orderPayload = { ...formData, cart, createdAt: serverTimestamp() };
-      await addDoc(collection(db, "orders"), orderPayload);
+      // const orderPayload = { ...formData, cart, createdAt: serverTimestamp() };
+      // await addDoc(collection(db, "orders"), orderPayload);
 
       let paymentText = formData.paymentMethod === "cash" ? "Готівка при отриманні" : "Карткою";
 
@@ -37,7 +37,6 @@ export default function OrderForm({ cart, onClose }) {
       message += `Відділення: ${formData.branchNumber}\n`;
       message += `Оплата: ${paymentText}\n\nТовари:\n`;
       cart.forEach(item => message += `• ${item.name} x ${item.quantity}\n`);
-
 
       const telegramResponse = await sendTelegramMessage(message);
 

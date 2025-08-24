@@ -39,7 +39,7 @@ export default function ProductCard({ product, cart, setCart }) {
             <h2 className="font-semibold text-base sm:text-lg md:text-xl">{product.name}</h2>
             <div className="flex justify-between items-center">
 
-              <p className="text-red-600 font-bold sm:text-base text-xl sm:text-[10px] md:text-[13px] lg:text-[16px]">{product.price} грн/{product.unit}</p>
+              <p className="text-red-600 font-bold sm:text-base text-xl sm:text-[10px] md:text-[13px] lg:text-[16px]">{product.price} грн / {product.unit}</p>
               <button
                 onClick={handleCartClick}
                 className={`w-min bottom-2 right-2 rounded-full border-2 p-2 transition ${inCart ? "bg-green-500 border-green-500" : "border-gray-200 hover:bg-red-50"

@@ -216,7 +216,7 @@ export default function Admin() {
             <select name="unit" value={productData.unit} onChange={handleChange} className="border rounded-lg p-2">
               <option value="шт">шт</option>
               <option value="кг">кг</option>
-              <option value="г">г</option>
+              <option value="100 г">100 г</option>
               <option value="л">л</option>
               <option value="мл">мл</option>
             </select>
@@ -239,7 +239,9 @@ export default function Admin() {
                 <img src={product.image} alt={product.name} className="w-16 h-16 object-cover rounded-lg" />
                 <div>
                   <p className="font-semibold">{product.name}</p>
-                  <p>{product.description}</p>
+                  <p className="text-gray-600 line-clamp-2 break-words [overflow-wrap:anywhere]">
+                    {product.description}
+                  </p>
                   <p>{product.price} {product.unit}</p>
                 </div>
               </div>

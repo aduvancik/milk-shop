@@ -27,7 +27,7 @@ export default function CartPage() {
         <div className="text-center">
           <p className="text-gray-500 mb-4">Ваш кошик порожній</p>
           <Link
-            href="/products"
+            href="/"
             className="bg-[#466a59] text-white px-6 py-2 rounded-lg hover:bg-[#385548] transition"
           >
             Перейти до товарів
@@ -36,7 +36,8 @@ export default function CartPage() {
       ) : (
         <div className="space-y-4">
           {cart.map((item, idx) => (
-        <Link href={`/product/${item.id}`}
+            <Link
+              href={`/product/${item.id}`}
               key={idx}
               className="flex items-center justify-between bg-white p-4 rounded-xl shadow-md border"
             >
@@ -61,15 +62,18 @@ export default function CartPage() {
 
               {/* Кнопка видалення */}
               <button
-                onClick={() =>
-                  setCart(cart.filter((_, index) => index !== idx))
-                }
+                onClick={(e) => {
+                  e.preventDefault();   // блокуємо default поведінку кнопки
+                  e.stopPropagation();  // зупиняємо спрацьовування Link
+                  setCart(cart.filter((_, index) => index !== idx));
+                }}
                 className="text-red-500 hover:bg-red-100 rounded-full p-2 transition"
               >
                 <X size={20} />
               </button>
             </Link>
           ))}
+
 
           {/* Підсумок */}
           <div className="mt-6 bg-[#f5f9f7] p-6 rounded-xl shadow-inner">

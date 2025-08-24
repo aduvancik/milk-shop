@@ -4,6 +4,7 @@ import { db } from "@/firebase";
 import { doc, getDoc, collection, getDocs, query, limit } from "firebase/firestore";
 import { useCart } from "../../context/CartContext";
 import ProductCard from "@/components/ProductCard";
+import Image from "next/image";
 
 export default function ProductPage({ params }) {
   const { id } = use(params);
@@ -81,9 +82,11 @@ export default function ProductPage({ params }) {
       <div className="flex flex-col md:flex-row gap-8">
         {/* зображення */}
         <div className="flex-1 flex justify-center">
-          <img
+          <Image
             src={product.image || "/img/placeholder.png"}
             alt={product.name}
+            width={500}
+            height={500}
             className="w-full max-w-md rounded-2xl shadow-lg object-cover"
           />
         </div>
@@ -104,8 +107,8 @@ export default function ProductPage({ params }) {
             <button
               onClick={handleCartClick}
               className={`px-6 py-3 rounded-xl transition w-full md:w-auto ${inCart
-                  ? "bg-green-500 text-white hover:bg-green-600"
-                  : "bg-red-500 text-white hover:bg-red-600"
+                ? "bg-green-500 text-white hover:bg-green-600"
+                : "bg-red-500 text-white hover:bg-red-600"
                 }`}
             >
               {inCart ? "Видалити з корзини" : "Додати в корзину"}

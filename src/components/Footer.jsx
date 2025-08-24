@@ -9,8 +9,12 @@ export default function Footer() {
         {/* Контакти */}
         <div className="flex-1 min-w-[200px]">
           <h5 className="text-lg font-semibold mb-3 border-b border-white/30 pb-2">Контакти</h5>
-          <p className="hover:text-gray-200 transition">📞 +380671664464</p>
-          <p className="hover:text-gray-200 transition">✉️ ваша пошта@gmail.com</p>
+          <p>
+            📞 <a href="tel:+380671664464" className="hover:text-gray-200 transition">+380671664464</a>
+          </p>
+          <p>
+            ✉️ <a href="mailto:ваша_пошта@gmail.com" className="hover:text-gray-200 transition">ваша_пошта@gmail.com</a>
+          </p>
         </div>
 
         {/* Оплата та доставка */}
@@ -28,8 +32,8 @@ export default function Footer() {
               href="https://t.me/TAVAT71"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Telegram"
               className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-md text-[#1da1f2] text-2xl transition transform hover:scale-110 hover:shadow-lg"
-              title="Telegram"
             >
               <FaTelegramPlane />
             </Link>
@@ -38,8 +42,8 @@ export default function Footer() {
               href="viber://chat?number=+380671664464"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Viber"
               className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-md text-[#665cac] text-2xl transition transform hover:scale-110 hover:shadow-lg"
-              title="Viber"
             >
               <FaViber />
             </Link>
@@ -50,7 +54,29 @@ export default function Footer() {
       <div className="mt-10 border-t border-white/20 pt-4 text-sm text-gray-200 text-center">
         © {new Date().getFullYear()} Всі права захищені | Ваш магазин
       </div>
-    </footer>
 
+      {/* Structured data для SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Ваш магазин",
+            url: "https://milk-shop.vercel.app",
+            logo: "https://milk-shop.vercel.app/img/favikon.png",
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+380671664464",
+              contactType: "customer service",
+            },
+            sameAs: [
+              "https://t.me/TAVAT71",
+              "viber://chat?number=+380671664464",
+            ],
+          }),
+        }}
+      />
+    </footer>
   );
 }

@@ -1,0 +1,15 @@
+# Дозволяємо всім пошуковим системам індексувати сайт
+User-agent: *
+# Забороняємо індексацію адміністративних сторінок і API
+Disallow: /admin/
+Disallow: /api/
+Disallow: /firebase/
+Disallow: /_next/        # Next.js приватні файли
+Disallow: /node_modules/  # якщо випадково доступно
+
+# Дозволяємо індексацію кошика і товарів
+Allow: /cart
+Allow: /product/
+
+# Sitemap
+Sitemap: https://milk-shop-two.vercel.app/sitemap.xml

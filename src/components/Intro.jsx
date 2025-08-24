@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function Intro() {
@@ -17,15 +18,21 @@ export default function Intro() {
       </motion.h1>
 
       {/* Картинка */}
-      <motion.img
-        src="/img/milk.png"
-        alt="milk production"
+      <motion.div
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
         className="w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px]"
-      />
+      >
+        <Image
+          src="/img/milk.png"
+          alt="milk production"
+          width={700} // вкажи реальні розміри
+          height={700}
+          priority
+        />
+      </motion.div>
     </section>
   );
 }
